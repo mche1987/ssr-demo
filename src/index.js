@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.static('public')); // app contains public files
 app.get('/', (req, res) => {
-    res.send(renderer());
+    res.send(renderer(req));
 })
 
 app.listen(3000, () => {
