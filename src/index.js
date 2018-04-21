@@ -11,12 +11,16 @@ app.use(express.static('public')); // app contains public files
 app.get('*', (req, res) => {
     const store = createStore();
 
-    matchRoutes(Routes, req.path).map(({ route }) => {
-        return route.loadData ? route.loadData() : null;
-    })
+    const matchedRoutesRes = matchRoutes(Routes, req.path);
+    const promises = matchedRoutesRes.map( ({ route }) => {
+        return route.loadData ? route.loadData(store) : null;
+    });
 
-    res.send(renderer(req, store));
-})
+    // console.log(promises);
+    Promise.all(promises).then(() => {
+        res.send(renderer(req, store));
+    });
+});
 
 app.listen(3000, () => {
     console.log("listening on 3000")
