@@ -5,7 +5,6 @@ const Home = () => {
         <div>
             <div>I am the home component</div>
             <button onClick={() => console.log("HI THIS WON'T WORK")} >Press me!</button>
-
         </div>
     )
 }
