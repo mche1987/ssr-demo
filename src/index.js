@@ -8,16 +8,16 @@ import createStore from './helpers/createStore';
 
 const app = express();
 
-app.use('/api', proxy('http://react-ssr-api.heroukuapp.com', {
+app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
     // course specific configs below
     proxyReqOptDecorator(opts){
-        opts.header['x-forwarded-host'] = 'localhost:3000';
+        opts.headers['x-forwarded-host'] = 'localhost:3000';
         return opts;
-    }
+    } 
 })) // express middleware 
 app.use(express.static('public')); // app contains public files
 app.get('*', (req, res) => {
-    const store = createStore();
+    const store = createStore(req);
 
     const matchedRoutesRes = matchRoutes(Routes, req.path);
     const promises = matchedRoutesRes.map( ({ route }) => {
