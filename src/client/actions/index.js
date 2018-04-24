@@ -25,3 +25,13 @@ export const fetchCurrentUser = () => async (dispatch, getState, axiosApi) => {
         console.error("current user query error", e);
     }
 }
+
+export const FETCH_ADMINS = "fetch admins";
+export const fetchAdmins = () => async (dispatch, getState, axiosApi) => {
+    const res = await axiosApi.get('/admins');
+
+    dispatch({
+        type: FETCH_ADMINS,
+        payload: res
+    })
+}
