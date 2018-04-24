@@ -13,14 +13,19 @@ class UsersList extends Component {
             return <li key={user.id}>{user.name}</li>
         })
     }
+    head() {
+        return (
+            <Helmet>
+                <title>{`${this.props.users.length} Users App`}</title>
+                <meta property="og:title" content="Users App"></meta>
+            </Helmet>
+        )
+    }
 
     render() {
         return (
             <div>
-                <Helmet>
-                    <title>Users App</title>
-                    <meta property="og:title" content="Users App"></meta>
-                </Helmet>
+                { this.head() }
                 Here's a big list of users
                 <ul>{ this.renderUsers() }</ul>
             </div>
