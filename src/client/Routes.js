@@ -21,6 +21,7 @@ export default [
             },
             {
                 ...NotFoundPage
+                // no path needed, catch-all
             }
         ]
     }

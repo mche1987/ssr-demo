@@ -27,7 +27,14 @@ app.get('*', (req, res) => {
 
     // console.log(promises);
     Promise.all(promises).then(() => {
-        res.send(renderer(req, store));
+        const context = {};
+        const content = renderer(req, store, context);
+
+        if (context.notFound) { // being set on the NotFoundPage via renderer when route matches
+            res.status(404);
+        }
+
+        res.send(content);
     });
 });
 
