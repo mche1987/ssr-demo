@@ -21,7 +21,8 @@ app.get('*', (req, res) => {
     const store = createStore(req);
 
     const matchedRoutesRes = matchRoutes(Routes, req.path);
-    const promises = matchedRoutesRes.map( ({ route }) => {
+    const promises = matchedRoutesRes.map(({ route }) => {
+        // console.log(store, "store being passed in as arg for pages")
         return route.loadData ? route.loadData(store) : null;
     });
 
