@@ -10,11 +10,12 @@ const app = express();
 
 app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
     // course specific configs below
-    proxyReqOptDecorator(opts){
+    proxyReqOptDecorator(opts) {
+        // settings the origins so it redirects to oauth process
         opts.headers['x-forwarded-host'] = 'localhost:3000';
         return opts;
-    } 
-})) // express middleware 
+    }
+})) // express middleware
 app.use(express.static('public')); // app contains public files
 app.get('*', (req, res) => {
     const store = createStore(req);
