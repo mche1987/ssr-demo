@@ -12,12 +12,12 @@ import Routes from './Routes';
 import reducers from './reducers';
 
 const axiosInstance = axios.create({
-    baseURL: '/api' // prepends /api to any url used 
+    baseURL: '/api' // prepends /api to any url used
 })
 
 const store = createStore(
     reducers,
-    {},
+    window.INITIAL_STATE,
     applyMiddleware(thunk.withExtraArgument(axiosInstance)) // pass in to use in action creators
 );
 

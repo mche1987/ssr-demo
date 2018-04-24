@@ -8,3 +8,20 @@ export const fetchUsers = () => async (dispatch, getState, axiosApi) => { // api
         payload: res
     })
 }
+
+export const FETCH_CURRENT_USER = 'fetchcurruser';
+export const fetchCurrentUser = () => async (dispatch, getState, axiosApi) => {
+
+    try {
+        // console.log("fetching");
+        const res = await axiosApi.get("/current_user");
+        // console.log("fetched", res);
+        dispatch({
+            type: FETCH_CURRENT_USER,
+            payload: res
+        })
+    }
+    catch (e) {
+        console.error("current user query error", e);
+    }
+}
